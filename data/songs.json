@@ -1,0 +1,48 @@
+{
+   "songs": [
+
+      {
+        "id": 1,
+        "title": "Annie Waits",
+        "artist": "Ben Folds",
+        "album": "Rockin' the Suburbs",
+        "year": 2001
+      },
+      {
+        "id": 2,
+        "title": "Always Where I Need to Be",
+        "artist": "The Kooks",
+        "album": "Konk",
+        "year": 2008
+      },
+      {
+        "id": 3,
+        "title": "Commotion",
+        "artist": "The Features",
+        "album": "Contrast EP",
+        "year": 2006
+      },
+      {
+        "id": 4,
+        "title": "Power and the Passion",
+        "artist": "Midnight Oil",
+        "album": "10,9,8...",
+        "year": 1982
+      },
+      {
+        "id": 5,
+        "title": "Like Wow, Wipeout",
+        "artist": "Hoodoo Gurus",
+        "album": "Mars Needs Guitars",
+        "year": 1985
+      },
+      {
+        "id": 6,
+        "title": "Blood and Roses",
+        "artist": "The Smithereens",
+        "album": "Especially for You",
+        "year": 1986
+      }
+
+   ]
+}

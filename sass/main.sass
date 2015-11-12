@@ -1,0 +1,74 @@
+@import "form"
+
+$nav-color: #FFB4B0
+
+html
+  font-size: 10px
+
+body
+  background: url('../imgs/fender_stratocaster_guitar_3.jpg') no-repeat center center fixed
+  background-size: cover
+
+.box
+  border: 2px solid black
+  font-size: 1.4rem
+  border-radius: 2px
+
+nav
+  margin-top: 1.5rem
+
+.uiContainer
+  &__form
+    padding: 0
+    padding-bottom: 1rem
+    background-color: #4FC3F7
+
+    &--input
+      padding:
+        top: .75rem
+        bottom: .75rem
+
+    .dropdown-toggle
+      width: 100%
+
+    .genre
+      padding: 0
+      &:first-of-type
+        padding-left: 1.5rem
+
+  &--wrapper
+    padding-right: 0
+
+  &__song-list
+    height: 361px
+    padding-right: 0
+    overflow: scroll
+    // background: url('../imgs/fender_stratocaster_guitar_3.jpg')
+    // background-repeat: no-repeat
+
+    .song-list
+      list-style-type: none
+
+      li
+        margin-bottom: 1rem
+
+      .song-list__item--data
+        padding-left: 0
+
+        li
+          display: inline-block
+          padding-right: 1.25rem
+          padding-left: 1.25rem
+          border-right: 2px solid #000
+
+          &:last-of-type
+            border-right: none
+          &:first-of-type
+            padding-left: 0
+
+      .song-title
+        display: block
+        color: #785616
+        font-size: 2.5rem
+        margin-bottom: .5rem
+

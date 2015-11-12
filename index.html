@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music History w/Angular</title>
+  <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body ng-app="SongApp">
+  <div class="container">
+    <section ng-controller="SongListCtrl">
+
+      <main class="uiContainer row">
+
+        <section class="uiContainer--wrapper col-xs-9">
+          <div class="uiContainer__song-list box col-sm-11.5">
+            <div ng-view></div>
+          </div>
+        </section>
+      </main>
+    </section>
+  </div>
+  <!-- scripts -->
+  <!-- libraries -->
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="lib/bower_components/angular/angular.js"></script>
+  <script src="lib/bower_components/angular-route/angular-route.js"></script>
+
+  <!-- app-specific scripts -->
+  <script src="app/app.js"></script>
+  <!-- scripts -->
+</body>
+</html>
