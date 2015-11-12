@@ -9,13 +9,13 @@ Fork it, clone it, run it:
   - run `grunt` to generate the CSS and set up watch tasks for JS lint and SASS compilation
   - Back in the first tab, make sure you're not in a sub-folder then run `http-server`
   
-Once you open the browser to the `blahblah:8080/#/songs/list`, you should see a div with 6 song title in it, and a text box.
+Once you open the browser to the `blahblah:8080/#/songs/list`, you should see a div with 6 song titles in it, and a text box.
 
 Change `/#/songs/list` to `/#/songs/new` and you should see a form for entering a new song.
 
 Fill out the form and click `Add Song`. If your dev tools are open (If not, why aren't they?) you will see a console log of the list of songs, including the one you just added. Change route from `new` back to `list` (don't refresh the browser) and you will see....nothing new. Why? We just added a new song and the console.log shows it added to the songs array. What's going on?
 
-The answer lies in the wonderful world of promises. See if you can figure out how to get a new promise to be created when a new song is added, instead of getting back an already resolved promise from the ititial page load, that didn't include the new song.
+The answer lies in the wonderful world of promises. See if you can figure out how to get a new promise to be created when a new song is added, instead of getting back an already resolved promise from the initial page load that didn't include the new song.
 
 If you get that working, try these things:
   - Get the `getSingleSong` factory method working
