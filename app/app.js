@@ -14,9 +14,9 @@ app.config(['$routeProvider',
   }]);
 
 app.factory('song_service', function($http, $q) {
-  var songList;
+  var songList = [];
 
-  var getSongData = function() {
+  function init() {
     return $q(function(resolve, reject) {
     $http
       .get('./data/songs.json')
@@ -29,11 +29,12 @@ app.factory('song_service', function($http, $q) {
         }
       );
     });
-  };
+  }
 
+  init();
 
   function getSongs(){
-    return getSongData();
+    return songList;
   }
 
   function getSingleSong(id) {
@@ -60,11 +61,7 @@ app.controller("SongListCtrl",
     "song_service",
     function($scope, song_service ) {
       // get initial list of songs on page load
-      song_service.getSongs().then(function(data) {
-        $scope.songs_list = data;
-      }).catch(function() {
-        $scope.error = "Songs could not be loaded";
-      });
+      $scope.songs_list = song_service.getSongs();
     }
   ]
 );
@@ -77,12 +74,12 @@ app.controller("AddSongCtrl",
       $scope.newSong = { title: "", album: "", year: "", artist: "" };
 
       $scope.addSong = function() {
-        $scope.songs_list = song_service.addSong({
+        song_service.addSong({
           artist: $scope.newSong.artist,
           title: $scope.newSong.title,
-          album: $scope.newSong.album
+          album: $scope.newSong.album,
+          year: $scope.newSong.year
         });
-        console.log("Addsong", $scope.songs_list);
       };
     }
   ]
