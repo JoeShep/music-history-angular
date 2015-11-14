@@ -1,4 +1,4 @@
-var app = angular.module("SongApp", ['ngRoute']);
+var app = angular.module("SongApp", ['firebase', 'ngRoute']);
 
 app.config(['$routeProvider',
   function($routeProvider) {
@@ -10,58 +10,24 @@ app.config(['$routeProvider',
       .when('/songs/new', {
         templateUrl: 'partials/song-form.html',
         controller: 'AddSongCtrl'
-      });
+      })
+      // Here we dynamically create the route with the `:songId` parameter, which gets defined in the controller
+      .when('/songs/:songId', {
+        templateUrl: 'partials/song-detail.html',
+        controller: 'SongDetailCtrl'
+      })
+      .otherwise({ redirectTo: '/songs/list' });
+
   }]);
-
-app.factory('song_service', function($http, $q) {
-  var songList = [];
-
-  function init() {
-    return $q(function(resolve, reject) {
-    $http
-      .get('./data/songs.json')
-      .success(
-        function(objectFromJSONFile) {
-          songList = objectFromJSONFile.songs;
-          resolve(songList)
-        },function(error) {
-          reject(error);
-        }
-      );
-    });
-  }
-
-  init();
-
-  function getSongs(){
-    return songList;
-  }
-
-  function getSingleSong(id) {
-    return songList.filter(function(song){
-      return song.id === id;
-    })[0];
-  }
-
-  function addSong(songObj) {
-    songList.push(songObj);
-    return songList;
-  }
-
-  return {
-    getSongs: getSongs,
-    getSingleSong: getSingleSong,
-    addSong: addSong
-  };
-}); //end factory
 
 app.controller("SongListCtrl",
   [
     "$scope",
-    "song_service",
-    function($scope, song_service ) {
+    "$firebaseArray",
+    function($scope, $songsArray ) {
+      var ref = new Firebase("https://nss-nc02-ng-music.firebaseio.com/songs");
       // get initial list of songs on page load
-      $scope.songs_list = song_service.getSongs();
+      $scope.songs_list = $songsArray(ref);
     }
   ]
 );
@@ -69,18 +35,48 @@ app.controller("SongListCtrl",
 app.controller("AddSongCtrl",
   [
     "$scope",
-    "song_service",
-    function($scope, song_service ) {
-      $scope.newSong = { title: "", album: "", year: "", artist: "" };
+    "$firebaseArray",
+    function($scope, $songsArray ) {
+      var ref = new Firebase("https://nss-nc02-ng-music.firebaseio.com/songs");
+      $scope.songs = $songsArray(ref);
+      $scope.newSong = {};
 
       $scope.addSong = function() {
-        song_service.addSong({
+        $scope.songs.$add({
           artist: $scope.newSong.artist,
           title: $scope.newSong.title,
           album: $scope.newSong.album,
           year: $scope.newSong.year
         });
       };
+    }
+  ]
+);
+
+app.controller("SongDetailCtrl",
+  [
+    "$scope",
+    "$routeParams",
+    "$firebaseArray",
+    function($scope, $routeParams, $songsArray ) {
+      $scope.selectedSong = "{}";
+      // $routeParams allows you to grab the value of the current route parameters. So, here we can pluck out the id of the particular song, becasue we set it in the href of the link from song-list partial
+      $scope.songId = $routeParams.songId;
+
+      var ref = new Firebase("https://nss-nc02-ng-music.firebaseio.com/songs");
+      $scope.songs = $songsArray(ref);
+
+      // Make sure you use the $loaded promise handler, which waits
+      // for all songs to be loaded from the reference before you try
+      // to grab the record the user wanted.
+      $scope.songs.$loaded()
+        .then(function() {
+          // The $getRecord method on a $firebaseArray is very useful
+          $scope.selectedSong = $scope.songs.$getRecord($scope.songId);
+        })
+        .catch(function(error) {
+          console.log("Error:", error);
+        });
     }
   ]
 );
