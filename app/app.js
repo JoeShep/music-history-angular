@@ -11,7 +11,7 @@ app.config(['$routeProvider',
         templateUrl: 'partials/song-form.html',
         controller: 'AddSongCtrl'
       })
-      // Here we dynamically create the route with the `:songId` parameter, which gets defined in the controller
+      // Here we set the route with the `:songId` parameter, which gets matched in the controller
       .when('/songs/:songId', {
         templateUrl: 'partials/song-detail.html',
         controller: 'SongDetailCtrl'
