@@ -3,13 +3,16 @@
     <span>Song name: </span><input type="text" ng-model="newSong.title" />
   </div>
   <div>
-    <span>Album Name:</span> <input type="text" ng-model="newSong.album" />
+    <span>Album name:</span> <input type="text" ng-model="newSong.album" />
   </div>
   <div>
-    <span>Album Year:</span> <input type="text" ng-model="newSong.year" />
+    <span>Album year:</span> <input type="text" ng-model="newSong.year" />
   </div>
   <div>
     <span>Artist:</span> <input type="text" ng-model="newSong.artist" />
+  </div>
+  <div>
+    <span>Album art url:</span> <input type="text" ng-model="newSong.albumUrl" />
   </div>
   <a class="btn btn-default" href="#/songs/list" role="button" ng-click="addSong()">Add Song</a>
 </section>

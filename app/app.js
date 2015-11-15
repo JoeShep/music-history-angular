@@ -46,7 +46,8 @@ app.controller("AddSongCtrl",
           artist: $scope.newSong.artist,
           title: $scope.newSong.title,
           album: $scope.newSong.album,
-          year: $scope.newSong.year
+          year: $scope.newSong.year,
+          albumUrl: $scope.newSong.albumUrl + "?raw=1"
         });
       };
     }
@@ -59,7 +60,7 @@ app.controller("SongDetailCtrl",
     "$routeParams",
     "$firebaseArray",
     function($scope, $routeParams, $songsArray ) {
-      $scope.selectedSong = "{}";
+      $scope.selectedSong = {};
       // $routeParams allows you to grab the value of the current route parameters. So, here we can pluck out the id of the particular song, becasue we set it in the href of the link from song-list partial
       $scope.songId = $routeParams.songId;
 
@@ -73,6 +74,7 @@ app.controller("SongDetailCtrl",
         .then(function() {
           // The $getRecord method on a $firebaseArray is very useful
           $scope.selectedSong = $scope.songs.$getRecord($scope.songId);
+          console.log($scope.selectedSong);
         })
         .catch(function(error) {
           console.log("Error:", error);

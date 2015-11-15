@@ -1,4 +1,10 @@
-<h2>{{ selectedSong.title }}</h2>
-<h3>by {{ selectedSong.artist}}</h3>
-<h4>from the {{ selectedSong.year}} album <em>{{ selectedSong.album }}</em></h4>
-<a class="btn btn-default" href="#/songs/list" role="button">Back to List</a>
+<div class="song-detail__info">
+  <h2>{{ selectedSong.title }}</h2>
+  <h3>by {{ selectedSong.artist}}</h3>
+  <h4>from the {{ selectedSong.year}} album <em>{{ selectedSong.album }}</em></h4>
+  <a class="btn btn-default" href="#/songs/list" role="button">Back to List</a>
+</div>
+<div class="song-detail__albumArt">
+  <img ng-src="{{ selectedSong.albumUrl }}" alt="">
+</div>
+
