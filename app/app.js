@@ -1,8 +1,21 @@
-var app = angular.module("SongApp", ['firebase', 'ngRoute']);
+var app = angular.module("SongApp",
+  [
+    'firebase',
+    'ngRoute',
+    'Songs.User'
+  ]);
 
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
+      .when('/', {
+        templateUrl: 'app/user/partials/user-login.html',
+        controller: 'UserCtrl'
+      })
+      .when('/register', {
+        templateUrl: 'app/user/partials/user-new.html',
+        controller: 'UserCtrl'
+      })
       .when('/songs/list', {
         templateUrl: 'partials/song-list.html',
         controller: 'SongListCtrl'
@@ -24,10 +37,17 @@ app.controller("SongListCtrl",
   [
     "$scope",
     "$firebaseArray",
-    function($scope, $songsArray ) {
+    "Auth",
+    function($scope, $songsArray, Auth ) {
       var ref = new Firebase("https://nss-nc02-ng-music.firebaseio.com/songs");
-      // get initial list of songs on page load
+      var auth = ref.getAuth();
+      var user = auth.uid;
+
       $scope.songs_list = $songsArray(ref);
+      // get initial list of songs on page load, filtered by userID. showSong is called from ng-if in song-list partial
+      $scope.showSong = function(song) {
+        return song.userId === user;
+      };
     }
   ]
 );
@@ -36,10 +56,16 @@ app.controller("AddSongCtrl",
   [
     "$scope",
     "$firebaseArray",
-    function($scope, $songsArray ) {
+    "Auth",
+    function($scope, $songsArray, Auth ) {
       var ref = new Firebase("https://nss-nc02-ng-music.firebaseio.com/songs");
       $scope.songs = $songsArray(ref);
       $scope.newSong = {};
+      $scope.auth = Auth;
+      $scope.auth.$onAuth(function(authData) {
+        $scope.userData = authData.uid;
+        console.log("AddSongCtrl", $scope.userData);
+      });
 
       $scope.addSong = function() {
         $scope.songs.$add({
@@ -47,7 +73,8 @@ app.controller("AddSongCtrl",
           title: $scope.newSong.title,
           album: $scope.newSong.album,
           year: $scope.newSong.year,
-          albumUrl: $scope.newSong.albumUrl + "?raw=1"
+          albumUrl: $scope.newSong.albumUrl + "?raw=1",
+          userId: $scope.userData
         });
       };
     }

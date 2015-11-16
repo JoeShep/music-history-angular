@@ -1,0 +1,15 @@
+<div class="user-container">
+  <span>Email:</span> <input ng-model="email" type="text">
+  <span>Password:</span> <input ng-model="password" type="text">
+
+  <br><br>
+
+  <button ng-click="createUser()">Create User</button>
+
+  <br><br>
+
+  <button ng-click="removeUser()">Remove User</button>
+
+  <p ng-if="message">Message: <strong>{{ message }}</strong></p>
+  <p ng-if="error">Error: <strong>{{ error }}</strong></p>
+</div>

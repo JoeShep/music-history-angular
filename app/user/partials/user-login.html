@@ -1,0 +1,19 @@
+  <div ng-show="authData">
+    <p>Hello, {{ authData.password.email }}</p>
+    <a class="btn btn-default" href="#/songs/list" role="button">Go to my songs</a>
+    <button ng-click="auth.$unauth()">Logout</button>
+    <button ng-click="removeUser()">Remove User</button>
+
+  </div>
+  <div ng-hide="authData">
+    <p>Welcome. Please log in.</p>
+    <span>Email:</span> <input ng-model="email" type="text">
+    <span>Password:</span> <input ng-model="password" type="text">
+    <a class="btn btn-default" ng-click="loginUser()" role="button">Login</a>
+
+
+    <button ng-click="auth.$authWithOAuthPopup('facebook')">Login With Facebook</button>
+
+    <p>Need an account?</p>
+    <a class="btn btn-default" href="#/register" role="button">Sign up</a>
+  </div>
