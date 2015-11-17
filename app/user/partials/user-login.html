@@ -1,19 +1,26 @@
-  <div ng-show="authData">
-    <p>Hello, {{ authData.password.email }}</p>
-    <a class="btn btn-default" href="#/songs/list" role="button">Go to my songs</a>
-    <button ng-click="auth.$unauth()">Logout</button>
-    <button ng-click="removeUser()">Remove User</button>
+  <section class="user-login">
+   <!--  ng-show allows us to hide and show elements based on whether a user has been authenticated -->
+    <div ng-show="authData">
+      <p>Hello, {{ authData.password.email }}</p>
+      <a class="btn btn-default" href="#/songs/list" role="button">Go to my songs</a>
+      <button ng-click="auth.$unauth()">Logout</button>
+      <button ng-click="removeUser()">Remove User</button>
 
-  </div>
-  <div ng-hide="authData">
-    <p>Welcome. Please log in.</p>
-    <span>Email:</span> <input ng-model="email" type="text">
-    <span>Password:</span> <input ng-model="password" type="text">
-    <a class="btn btn-default" ng-click="loginUser()" role="button">Login</a>
+    </div>
+    <!-- Same as ng-show, but this is hidden when authData has a value -->
+    <div ng-hide="authData">
+      <p>Welcome. Please log in.</p>
+      <div class="user-login__input">
+        <span>Email:</span> <input ng-model="email" type="text">
+      </div>
+      <div class="user-login__input">
+        <span>Password:</span> <input ng-model="password" type="text">
+      </div>
+      <a class="user-login__btn btn btn-default" ng-click="loginUser()" role="button">Login</a>
+      <span>or</span>
+      <a class="user-login__btn btn btn-default" ng-click="auth.$authWithOAuthPopup('facebook')" role="button">Login With Facebook</a>
 
-
-    <button ng-click="auth.$authWithOAuthPopup('facebook')">Login With Facebook</button>
-
-    <p>Need an account?</p>
-    <a class="btn btn-default" href="#/register" role="button">Sign up</a>
-  </div>
+      <p>Need an account?</p>
+      <a class="btn btn-default" href="#/register" role="button">Sign up</a>
+    </div>
+  </section>

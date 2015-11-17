@@ -64,7 +64,6 @@ app.controller("AddSongCtrl",
       $scope.auth = Auth;
       $scope.auth.$onAuth(function(authData) {
         $scope.userData = authData.uid;
-        console.log("AddSongCtrl", $scope.userData);
       });
 
       $scope.addSong = function() {

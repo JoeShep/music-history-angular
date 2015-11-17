@@ -1,12 +1,16 @@
-<div>
-  <input type="text" ng-model="query" />
-</div>
+<section class="songs-list">
+  <div>
+    <input class="songs-list__search" type="text" ng-model="query" placeholder="search"/>
+  </div>
 
-<div class="songsList" ng-repeat="song in songs_list | filter: query">
-  <a ng-if="showSong(song)" href="#/songs/{{ song.$id }}">{{ song.title }}</a>
-</div>
-<div>
-  {{ error }}
-</div>
+  <div class="songs-list__song" ng-repeat="song in songs_list | filter: query">
+    <!-- Adding ng-if filters the songs list by user ID -->
+    <a class="songs-list__item" ng-if="showSong(song)" href="#/songs/{{ song.$id }}">{{ song.title }}</a>
+  </div>
+  <div>
+    {{ error }}
+  </div>
 
-<a class="btn btn-default" href="#/songs/new" role="button">Add a New Song</a>
+  <a class="songs-list__btn btn btn-default" href="#/songs/new" role="button">Add a New Song</a>
+</section>
+

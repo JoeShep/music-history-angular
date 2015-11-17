@@ -22,6 +22,10 @@ nav
   margin-top: 1.5rem
 
 .uiContainer
+  h1
+    margin-left: 1.5rem
+    text-shadow: 2px 2px 1px rgba(150, 150, 150, 1)
+
   &__form
     padding: 0
     padding-bottom: 1rem
@@ -44,44 +48,51 @@ nav
     padding-right: 0
 
   &__song-list
-    height: 361px
+    height: 360px
     padding-right: 0
     overflow: scroll
-    // background: url('../imgs/fender_stratocaster_guitar_3.jpg')
-    // background-repeat: no-repeat
 
-    .song-list
-      list-style-type: none
+    .songs-list
+      margin-left: 1.5rem
 
-      li
-        margin-bottom: 1rem
+      &__search
+        margin-top: .5rem
+        margin-bottom: 1.5rem
 
-      .song-list__item--data
-        padding-left: 0
-
-        li
-          display: inline-block
-          padding-right: 1.25rem
-          padding-left: 1.25rem
-          border-right: 2px solid #000
-
-          &:last-of-type
-            border-right: none
-          &:first-of-type
-            padding-left: 0
-
-      .song-title
-        display: block
-        color: #785616
-        font-size: 2.5rem
+      &__item
+        color: #fff
+        font-size: 2rem
         margin-bottom: .5rem
+
+      &__btn
+        margin-top: 1rem
 
 .song-detail__info,
 .song-detail__albumArt
   float: left
+  width: 50%
+  padding-left: 5px
+
+.song-detail__albumArt
+  text-align: center
+  margin-top: 20px
 
 .uiContainer
   span
     color: #fff
   p
     color: #fff
+
+.user-login
+  margin-left: 1.5rem
+
+  &__input
+    width: 45%
+    height: 3.5rem
+
+    input
+      float: right
+
+  &__btn
+    margin-top: 1rem
+    margin-bottom: 1rem
